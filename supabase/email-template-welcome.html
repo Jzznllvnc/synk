@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Synk!</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td align="center" style="padding: 40px 40px 20px 40px; background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-radius: 8px 8px 0 0;">
+                            <h1 style="margin: 0; color: #0c4a6e; font-size: 32px; font-weight: bold;">
+                                🎉 Welcome to Synk!
+                            </h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 24px; font-weight: 600;">
+                                Hi there! 👋
+                            </h2>
+                            
+                            <p style="margin: 0 0 16px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+                                Thank you for signing up for <strong>Synk</strong> - your all-in-one productivity hub!
+                            </p>
+                            
+                            <p style="margin: 0 0 24px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+                                To get started, please confirm your email address by clicking the button below:
+                            </p>
+                            
+                            <!-- CTA Button -->
+                            <table role="presentation" style="margin: 0 auto;">
+                                <tr>
+                                    <td align="center" style="border-radius: 6px; background-color: #0ea5e9;">
+                                        <a href="{{ .ConfirmationURL }}" target="_blank" style="display: inline-block; padding: 16px 32px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
+                                            Confirm Your Email
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 24px 0 0 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
+                                Or copy and paste this link into your browser:<br>
+                                <a href="{{ .ConfirmationURL }}" style="color: #0ea5e9; text-decoration: underline; word-break: break-all;">{{ .ConfirmationURL }}</a>
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Features Section -->
+                    <tr>
+                        <td style="padding: 0 40px 40px 40px;">
+                            <div style="background-color: #f9fafb; border-radius: 6px; padding: 24px; margin-bottom: 24px;">
+                                <h3 style="margin: 0 0 16px 0; color: #1f2937; font-size: 18px; font-weight: 600;">
+                                    What you can do with Synk:
+                                </h3>
+                                
+                                <table role="presentation" style="width: 100%;">
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <span style="color: #0ea5e9; font-size: 20px;">✅</span>
+                                            <span style="color: #4b5563; font-size: 15px; margin-left: 8px;">Manage tasks with priorities and deadlines</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <span style="color: #0ea5e9; font-size: 20px;">📝</span>
+                                            <span style="color: #4b5563; font-size: 15px; margin-left: 8px;">Write notes with markdown support</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <span style="color: #0ea5e9; font-size: 20px;">📁</span>
+                                            <span style="color: #4b5563; font-size: 15px; margin-left: 8px;">Store files securely in the cloud</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <span style="color: #0ea5e9; font-size: 20px;">📅</span>
+                                            <span style="color: #4b5563; font-size: 15px; margin-left: 8px;">Plan events with reminders</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <span style="color: #0ea5e9; font-size: 20px;">🎯</span>
+                                            <span style="color: #4b5563; font-size: 15px; margin-left: 8px;">Track productivity with analytics</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 20px 40px; background-color: #f9fafb; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
+                            <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px; text-align: center;">
+                                If you didn't create this account, you can safely ignore this email.
+                            </p>
+                            <p style="margin: 0; color: #9ca3af; font-size: 12px; text-align: center;">
+                                © 2024 Synk. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
