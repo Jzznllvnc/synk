@@ -7,6 +7,8 @@ import { signOut } from '@/lib/auth';
 import toast from 'react-hot-toast';
 import { Sun, Moon, Bell, User, LogOut, ChevronDown, PanelRightClose } from 'lucide-react';
 import { useSidebar } from '@/lib/contexts/SidebarContext';
+import { useLogout } from '@/lib/contexts/LogoutContext';
+import Image from 'next/image';
 
 interface HeaderProps {
   title: string;
@@ -17,8 +19,10 @@ export default function Header({ title, subtitle }: HeaderProps) {
   const { user, profile } = useAuth();
   const router = useRouter();
   const { isCollapsed, toggleSidebar } = useSidebar();
+  const { showLogoutLoading, hideLogoutLoading } = useLogout();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [notificationCount, setNotificationCount] = useState(3); // Example count
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -57,14 +61,40 @@ export default function Header({ title, subtitle }: HeaderProps) {
     toast.success(`${newTheme === 'dark' ? 'Dark' : 'Light'} mode enabled`);
   };
 
-  const handleSignOut = async () => {
+  const handleLogoutClick = () => {
+    setIsProfileOpen(false);
+    setShowLogoutConfirm(true);
+  };
+
+  const handleConfirmLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     try {
+      // Show loading screen first, then hide modal
+      showLogoutLoading();
+      setTimeout(() => setShowLogoutConfirm(false), 50);
+      
+      // Sign out in background
       await signOut();
-      toast.success('Signed out successfully');
+      
+      // Show loading for at least 2 seconds
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Hide loading and navigate
+      hideLogoutLoading();
       router.push('/auth/login');
+      router.refresh();
     } catch (error: any) {
-      toast.error('Failed to sign out');
+      console.error('Logout error:', error);
+      hideLogoutLoading();
+      setShowLogoutConfirm(false);
+      toast.error(error.message || 'Failed to sign out');
     }
+  };
+
+  const handleCancelLogout = () => {
+    setShowLogoutConfirm(false);
   };
 
   const handleManageProfile = () => {
@@ -159,7 +189,7 @@ export default function Header({ title, subtitle }: HeaderProps) {
                   Manage Profile
                 </button>
                 <button
-                  onClick={handleSignOut}
+                  onClick={handleLogoutClick}
                   className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="w-4 h-4 mr-3" />
@@ -170,6 +200,57 @@ export default function Header({ title, subtitle }: HeaderProps) {
           )}
         </div>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+          <div 
+            className="bg-white rounded-2xl shadow-2xl p-12 max-w-md w-full mx-6 animate-slideUp"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center text-center">
+              {/* Logout Icon */}
+              <div className="mb-6">
+                <Image
+                  src="/logout.svg"
+                  alt="Logout"
+                  width={150}
+                  height={150}
+                  className="w-40 h-40 mb-6"
+                />
+              </div>
+              
+              {/* Title */}
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Logout Confirmation
+              </h3>
+              
+              {/* Message */}
+              <p className="text-gray-600 mb-10 text-base">
+                Are you sure you want to log out? You will need to login again to continue.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 w-full">
+                <button
+                  type="button"
+                  onClick={handleCancelLogout}
+                  className="flex-1 px-5 py-2.5 bg-gray-100 border shadow-sm rounded-lg text-gray-700 font-semibold hover:bg-gray-200 transition-all duration-200"
+                >
+                  No, cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleConfirmLogout}
+                  className="flex-1 px-5 py-2.5 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                  Yes, logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { signIn, signInWithProvider } from '@/lib/auth';
 import toast from 'react-hot-toast';
 import { Eye, EyeClosed } from 'lucide-react';
+import LottieLoader from '@/components/LottieLoader';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,11 +23,15 @@ export default function LoginPage() {
 
     try {
       await signIn({ email, password });
-      toast.success('Welcome back!');
+      setLoading(false);
+      setIsLoggingIn(true);
+      
+      // Show loading screen for at least 1.5 seconds
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
       router.push('/dashboard');
     } catch (error: any) {
       toast.error(error.message || 'Failed to sign in');
-    } finally {
       setLoading(false);
     }
   };
@@ -37,6 +43,15 @@ export default function LoginPage() {
       toast.error(error.message || `Failed to sign in with ${provider}`);
     }
   };
+
+  // Show logging in screen
+  if (isLoggingIn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100">
+        <LottieLoader size={280} text="Synking your account..." />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 px-4">

@@ -45,6 +45,12 @@ export async function signIn({ email, password }: SignInData) {
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
   if (error) throw error;
+  
+  // Clear any cached auth state
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('supabase.auth.token');
+    sessionStorage.clear();
+  }
 }
 
 // Get current user

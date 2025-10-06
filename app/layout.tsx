@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import Toast from '@/components/Toast'
+import { LogoutProvider } from '@/lib/contexts/LogoutContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -31,8 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${inter.className}`}>
-        {children}
-        <Toast />
+        <LogoutProvider>
+          {children}
+          <Toast />
+        </LogoutProvider>
       </body>
     </html>
   )

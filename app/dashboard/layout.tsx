@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import { SidebarProvider, useSidebar } from '@/lib/contexts/SidebarContext';
+import LottieLoader from '@/components/LottieLoader';
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { user, profile, loading } = useAuth();
@@ -56,7 +57,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <LottieLoader size={280} text="" />
       </div>
     );
   }
