@@ -71,7 +71,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className={`flex-1 flex flex-col transition-all duration-300 ${isCollapsed ? 'ml-24' : 'ml-64'}`}>
         <Header title={title} subtitle={subtitle} />
-        <main className="flex-1 overflow-y-auto bg-gray-50">
+        <main className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
           <div className="p-8">
             {children}
           </div>

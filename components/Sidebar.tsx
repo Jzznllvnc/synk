@@ -27,7 +27,13 @@ export default function Sidebar() {
   const { isCollapsed, toggleSidebar } = useSidebar();
 
   return (
-    <div className={`flex flex-col bg-white border-r border-gray-200 h-screen fixed transition-all duration-300 ${isCollapsed ? 'w-24' : 'w-64'}`}>
+    <div 
+      className={`flex flex-col h-screen fixed sidebar-container ${isCollapsed ? 'w-24' : 'w-64'}`}
+      style={{
+        backgroundColor: 'var(--bg-sidebar)',
+        borderRight: '1px solid var(--border-primary)'
+      }}
+    >
       {/* Logo */}
       <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} h-20 ${isCollapsed ? 'px-4' : 'px-6'} mt-4`}>
         <div className="flex items-center">
@@ -39,16 +45,20 @@ export default function Sidebar() {
             className="h-12 w-12"
           />
           {!isCollapsed && (
-            <span className="ml-3 text-3xl font-bold text-gray-900 whitespace-nowrap" style={{ fontFamily: 'var(--font-space-grotesk)' }}>Synk</span>
+            <span 
+              className="ml-3 text-3xl font-bold whitespace-nowrap" 
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+            >
+              Synk
+            </span>
           )}
         </div>
         {!isCollapsed && (
           <button
             onClick={toggleSidebar}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
-            title="Collapse sidebar"
+            className="p-1.5 rounded-lg sidebar-btn"
           >
-            <PanelRightOpen className="w-5 h-5 text-gray-600" />
+            <PanelRightOpen className="w-5 h-5" style={{ color: 'var(--icon-primary)' }} />
           </button>
         )}
       </div>
@@ -63,14 +73,7 @@ export default function Sidebar() {
               <Tooltip key={item.name} content={item.name} position="right">
                 <Link
                   href={item.href}
-                  className={`
-                    flex items-center justify-center py-3 text-sm font-medium rounded-lg transition-colors w-full
-                    ${
-                      isActive
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }
-                  `}
+                  className={`flex items-center justify-center py-3 text-sm font-medium rounded-lg w-full nav-item ${isActive ? 'active' : ''}`}
                 >
                   <item.icon className="w-5 h-5" />
                 </Link>
@@ -82,14 +85,7 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`
-                flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
-                ${
-                  isActive
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                }
-              `}
+              className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg nav-item ${isActive ? 'active' : ''}`}
             >
               <item.icon className="w-5 h-5 mr-3" />
               {item.name}
@@ -100,4 +96,3 @@ export default function Sidebar() {
     </div>
   );
 }
-

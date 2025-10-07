@@ -23,7 +23,7 @@ export default function LottieLoader({
           autoplay={true}
         />
       </div>
-      {text && <p className="mt-2 text-gray-600 font-bold">{text}</p>}
+      {text && <p className="mt-2 font-bold loader-text">{text}</p>}
     </div>
   );
 }

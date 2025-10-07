@@ -21,7 +21,7 @@ export function LogoutProvider({ children }: { children: ReactNode }) {
       {children}
       {/* Global Logout Loading Screen */}
       {isLoggingOut && (
-        <div className="fixed inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center z-[9999]">
+        <div className="logout-overlay-container">
           <LottieLoader size={280} text="Logging out of Synk..." />
         </div>
       )}
