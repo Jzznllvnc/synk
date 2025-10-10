@@ -100,11 +100,11 @@ export default function Tooltip({
               : 'translate(0, -50%)',
           }}
         >
-          <div className="bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap flex items-center">
+          <div className="bg-[#2f2247] dark:bg-[#ffffff] text-white font-medium dark:text-[#2f2247] text-sm px-3 py-2.5 rounded-lg shadow-lg whitespace-nowrap flex items-center">
             {content}
             {/* Arrow */}
             <div
-              className="absolute w-2 h-2 bg-gray-900 transform rotate-45"
+              className="absolute w-2 h-2 bg-[#2f2247] dark:bg-[#ffffff] transform rotate-45"
               style={{
                 [position === 'top' ? 'bottom' : position === 'bottom' ? 'top' : position === 'left' ? 'right' : 'left']: '-4px',
                 [position === 'top' || position === 'bottom' ? 'left' : 'top']: '50%',
